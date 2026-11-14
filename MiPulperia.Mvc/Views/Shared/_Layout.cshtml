@@ -66,6 +66,59 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+    $(function () {
+        const ruta = window.location.pathname.toLowerCase();
+
+        const modulos = [
+            "/clientes",
+            "/productos",
+            "/sucursales"
+        ];
+
+        if (!modulos.some(m => ruta === m || ruta === m + "/index")) {
+            return;
+        }
+
+        const tabla = $("table").first();
+
+        if (!tabla.length) return;
+
+        tabla.before(`
+            <div class="mb-3">
+                <label class="form-label">Buscar registros</label>
+                <input type="text"
+                       id="buscadorRegistros"
+                       class="form-control"
+                       placeholder="Escriba el nombre que desea buscar...">
+                <small id="resultadoBusqueda"
+                       class="text-muted"></small>
+            </div>
+        `);
+
+        $("#buscadorRegistros").on("input", function () {
+            const texto = normalizar($(this).val());
+            let total = 0;
+
+            tabla.find("tbody tr").each(function () {
+                const coincide = normalizar($(this).text()).includes(texto);
+                $(this).toggle(coincide);
+
+                if (coincide) total++;
+            });
+
+            $("#resultadoBusqueda").text(
+                total + " registro(s) encontrado(s)"
+            );
+        });
+
+        function normalizar(texto) {
+            return texto.toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
+        }
+    });
+</script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
