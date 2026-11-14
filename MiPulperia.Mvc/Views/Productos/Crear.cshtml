@@ -1,0 +1,129 @@
+
+@model MiPulperia.Model.Producto
+
+@{
+    ViewData["Title"] = "Nuevo producto";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-3">Registrar producto</h2>
+
+    <p class="text-muted">
+        Complete la información del nuevo producto.
+    </p>
+
+    <form asp-action="Crear" method="post">
+
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="All"
+             class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="Codigo" class="form-label">
+                Código
+            </label>
+            <input asp-for="Codigo"
+                   class="form-control" required />
+            <span asp-validation-for="Codigo"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Nombre" class="form-label">
+                Nombre
+            </label>
+            <input asp-for="Nombre"
+                   class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Descripcion" class="form-label">
+                Descripción
+            </label>
+            <textarea asp-for="Descripcion"
+                      class="form-control"
+                      rows="2"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Precio" class="form-label">
+                Precio
+            </label>
+            <input asp-for="Precio"
+                   type="number"
+                   min="0.01"
+                   step="0.01"
+                   class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Atributos" class="form-label">
+                Atributos JSON
+            </label>
+            <textarea asp-for="Atributos"
+                      class="form-control font-monospace"
+                      rows="5" required></textarea>
+
+            <small class="text-muted">
+                Ingrese las características del producto
+                utilizando un objeto JSON válido.
+            </small>
+
+            <span asp-validation-for="Atributos"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="MaximoReserva"
+                       class="form-label">
+                    Máximo por reserva
+                </label>
+                <input asp-for="MaximoReserva"
+                       type="number"
+                       min="1"
+                       class="form-control" required />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="HorasReserva"
+                       class="form-label">
+                    Horas de reserva
+                </label>
+                <input asp-for="HorasReserva"
+                       type="number"
+                       min="1"
+                       class="form-control" required />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="ExistenciaMinima"
+                       class="form-label">
+                    Existencia mínima
+                </label>
+                <input asp-for="ExistenciaMinima"
+                       type="number"
+                       min="0"
+                       class="form-control" required />
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Registrar producto
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Cancelar
+        </a>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

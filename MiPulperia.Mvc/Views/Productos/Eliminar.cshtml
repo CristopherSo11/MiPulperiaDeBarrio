@@ -1,0 +1,91 @@
+@model MiPulperia.Model.Producto
+
+@{
+    ViewData["Title"] = "Eliminar producto";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-danger mb-3">
+        Eliminar producto
+    </h2>
+
+    <div class="alert alert-warning">
+        ¿Está seguro de que desea eliminar este producto?
+        Esta acción no se puede deshacer.
+    </div>
+
+    <div class="card mb-4">
+
+        <div class="card-header">
+            Información del producto
+        </div>
+
+        <div class="card-body">
+
+            <p>
+                <strong>ID:</strong>
+                @Model.IdProducto
+            </p>
+
+            <p>
+                <strong>Código:</strong>
+                @Model.Codigo
+            </p>
+
+            <p>
+                <strong>Nombre:</strong>
+                @Model.Nombre
+            </p>
+
+            <p>
+                <strong>Descripción:</strong>
+                @Model.Descripcion
+            </p>
+
+            <p>
+                <strong>Precio:</strong>
+                ₡@Model.Precio.ToString("N2")
+            </p>
+
+            <p>
+                <strong>Atributos JSON:</strong>
+                <code>@Model.Atributos</code>
+            </p>
+
+            <p>
+                <strong>Máximo por reserva:</strong>
+                @Model.MaximoReserva
+            </p>
+
+            <p>
+                <strong>Horas de reserva:</strong>
+                @Model.HorasReserva
+            </p>
+
+            <p>
+                <strong>Existencia mínima:</strong>
+                @Model.ExistenciaMinima
+            </p>
+
+        </div>
+
+    </div>
+
+    <form asp-action="Eliminar"
+          asp-route-id="@Model.IdProducto"
+          method="post">
+
+        @Html.AntiForgeryToken()
+
+        <button type="submit" class="btn btn-danger">
+            Sí, eliminar producto
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Cancelar
+        </a>
+
+    </form>
+
+</div>

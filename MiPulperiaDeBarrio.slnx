@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="MiPulperia.Data/MiPulperia.Data.csproj" />
+  <Project Path="MiPulperia.Model/MiPulperia.Model.csproj" />
+  <Project Path="MiPulperia.Mvc/MiPulperia.Mvc.csproj" />
+</Solution>

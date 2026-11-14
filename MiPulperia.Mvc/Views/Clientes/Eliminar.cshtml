@@ -1,0 +1,73 @@
+@model MiPulperia.Model.Cliente
+
+@{
+    ViewData["Title"] = "Eliminar cliente";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-danger mb-3">
+        Eliminar cliente
+    </h2>
+
+    <div class="alert alert-warning">
+        ¿Está seguro de que desea eliminar este cliente?
+        Esta acción no se puede deshacer.
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Información del cliente
+        </div>
+
+        <div class="card-body">
+
+            <p>
+                <strong>ID:</strong>
+                @Model.IdCliente
+            </p>
+
+            <p>
+                <strong>Identificación:</strong>
+                @Model.Identificacion
+            </p>
+
+            <p>
+                <strong>Nombre:</strong>
+                @Model.Nombre
+            </p>
+
+            <p>
+                <strong>Correo electrónico:</strong>
+                @Model.Correo
+            </p>
+
+            <p>
+                <strong>Teléfono:</strong>
+                @(Model.Telefono ?? "Sin teléfono")
+            </p>
+
+        </div>
+    </div>
+
+    <form asp-controller="Clientes"
+          asp-action="Eliminar"
+          asp-route-id="@Model.IdCliente"
+          method="post">
+
+        @Html.AntiForgeryToken()
+
+        <button type="submit"
+                class="btn btn-danger">
+            Sí, eliminar cliente
+        </button>
+
+        <a asp-controller="Clientes"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Cancelar
+        </a>
+
+    </form>
+
+</div>

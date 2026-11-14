@@ -1,0 +1,71 @@
+@model MiPulperia.Model.Sucursal
+
+@{
+    ViewData["Title"] = "Eliminar sucursal";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-danger mb-3">Eliminar sucursal</h2>
+
+    <div class="alert alert-warning">
+        <strong>¡Atención!</strong>
+        ¿Está seguro de que desea eliminar esta sucursal?
+        Esta acción no se puede deshacer.
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Información de la sucursal
+        </div>
+
+        <div class="card-body">
+
+            <p>
+                <strong>ID:</strong>
+                @Model.IdSucursal
+            </p>
+
+            <p>
+                <strong>Nombre:</strong>
+                @Model.Nombre
+            </p>
+
+            <p>
+                <strong>Dirección:</strong>
+                @Model.Direccion
+            </p>
+
+            <p>
+                <strong>Teléfono:</strong>
+                @(Model.Telefono ?? "Sin teléfono")
+            </p>
+
+            <p>
+                <strong>Estado:</strong>
+                @(Model.Activa ? "Activa" : "Inactiva")
+            </p>
+
+        </div>
+    </div>
+
+    <form asp-controller="Sucursales"
+          asp-action="Eliminar"
+          asp-route-id="@Model.IdSucursal"
+          method="post">
+
+        @Html.AntiForgeryToken()
+
+        <button type="submit" class="btn btn-danger">
+            Sí, eliminar sucursal
+        </button>
+
+        <a asp-controller="Sucursales"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Cancelar
+        </a>
+
+    </form>
+
+</div>

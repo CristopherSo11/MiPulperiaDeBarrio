@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\MiPulperia.Data\MiPulperia.Data.csproj" />
+    <ProjectReference Include="..\MiPulperia.Model\MiPulperia.Model.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>bccde5f9-3b7b-446a-a3f8-75972d38b129</UserSecretsId>
+  </PropertyGroup>
+
+</Project>
