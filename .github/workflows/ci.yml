@@ -1,0 +1,35 @@
+﻿name: CI - Mi Pulperia de Barrio
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restaurar dependencias
+        run: dotnet restore MiPulperiaDeBarrio.slnx
+
+      - name: Compilar solucion
+        run: dotnet build MiPulperiaDeBarrio.slnx --configuration Release --no-restore
+
+      - name: Generar publicacion
+        run: dotnet publish MiPulperia.Mvc/MiPulperia.Mvc.csproj --configuration Release --output publish
+
+      - name: Guardar artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: MiPulperia
+          path: publish/
